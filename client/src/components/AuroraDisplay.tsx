@@ -1,8 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-const AuroraDisplay = ({ location }) => {
-  const [auroraData, setAuroraData] = useState(null);
-  const [error, setError] = useState(null);
+interface Location {
+  lat: number;
+  long: number;
+}
+
+interface AuroraData {
+  probability?: {
+    value: number;
+    // Add other properties if needed
+  };
+  // Define other properties as needed based on API response structure
+}
+
+interface AuroraDisplayProps {
+  location: Location | null;
+}
+
+const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
+  const [auroraData, setAuroraData] = useState<AuroraData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (location) {

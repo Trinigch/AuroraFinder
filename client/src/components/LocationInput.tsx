@@ -1,29 +1,71 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const LocationInput = ({ onLocationSelected }) => {
-  const inputRef = useRef(null);
+interface LocationInputProps {
+  onLocationSelected: (location: { lat: number; long: number }) => void;
+}
+
+const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const selectedPlaceTitleRef = useRef<HTMLParagraphElement | null>(null);
+  const selectedPlaceInfoRef = useRef<HTMLPreElement | null>(null);
 
   useEffect(() => {
-    const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-      types: ['geocode'],
-    });
+    async function initMap() {
+      // Request the Places library
+      //@ts-ignore
+      await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
 
-    autocomplete.addListener('place_changed', () => {
-      const place = autocomplete.getPlace();
-      const location = {
-        lat: place.geometry.location.lat(),
-        long: place.geometry.location.lng(),
-      };
-      onLocationSelected(location);
-    });
-  }, []);
+      // Create the input element with Place Autocomplete
+      //@ts-ignore
+      const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
+      
+      if (containerRef.current) {
+        containerRef.current.appendChild(placeAutocomplete);
+      }
 
-  return <input ref={inputRef} placeholder="Enter your location" />;
+      // Set up event listener for place selection
+      //@ts-ignore
+      placeAutocomplete.addEventListener('gmp-placeselect', async ({ place }) => {
+        await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location'] });
+
+        // Display place information in the UI (optional), ensuring refs are not null
+        if (selectedPlaceTitleRef.current && selectedPlaceInfoRef.current) {
+          selectedPlaceTitleRef.current.textContent = 'Selected Place:';
+          selectedPlaceInfoRef.current.textContent = JSON.stringify(
+            place.toJSON(), null, 2
+          );
+        }
+
+        // Extract location data and send to parent component
+        const location = {
+          lat: place.location.lat(),
+          long: place.location.lng()
+        };
+        onLocationSelected(location);
+      });
+    }
+
+    initMap();
+  }, [onLocationSelected]);
+
+  return (
+    <div>
+      {/* Container for the Google Places input */}
+      <div ref={containerRef}></div>
+      
+      {/* Optional UI for displaying selected place details */}
+      <p ref={selectedPlaceTitleRef}></p>
+      <pre ref={selectedPlaceInfoRef}></pre>
+    </div>
+  );
 };
 
 export default LocationInput;
 
-/*
+
+
+
+/* PLACES HTML
 <!DOCTYPE html>
 <html>
   <head>
@@ -60,8 +102,6 @@ export default LocationInput;
     </div>
   </body>
 </html>
-*/
-
 
 /* MAPS PLUS PLACE IN CASE WE DECIDE TO USE MAPPING AS WELL
 <!DOCTYPE html>
