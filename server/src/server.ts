@@ -7,6 +7,13 @@ import express from 'express';
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
 
+// TODO: Import and initialize configuration from config.ts
+import * as config from './config.js';
+
+// TODO: Use config variables as needed, particularly if any initial setup requires API keys
+// e.g., if setting up a service or middleware that requires API keys at startup
+
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
