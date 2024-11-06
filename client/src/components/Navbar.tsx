@@ -19,7 +19,7 @@ const Navbar = () => {
                         Find
                     </Link>
                 </li>
-                <li>
+                <li className='nav-item'>
                     <Link to="/login">
                         Sign out
                     </Link>
