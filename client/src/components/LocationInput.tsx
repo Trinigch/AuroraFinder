@@ -1,12 +1,24 @@
-// TODO: Import necessary React modules and Google Maps API types
-// Import the Google Maps API key from config
-import { GOOGLE_MAPS_API_KEY } from '../../../server/src/config.js';
+import React, { useRef, useEffect } from 'react';
 
-// TODO: Initialize the Google Maps Autocomplete instance in useEffect
-// TODO: Attach Autocomplete to an input field where users enter location
+const LocationInput = ({ onLocationSelected }) => {
+  const inputRef = useRef(null);
 
-// TODO: Set up a callback function that triggers when a location is selected
-// Use the Google Maps Geocoding API to convert the selected address to latitude and longitude
-// Store lat/long in state to pass along to the API
+  useEffect(() => {
+    const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
+      types: ['geocode'],
+    });
 
-// TODO: Render the input field with Google Autocomplete applied
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      const location = {
+        lat: place.geometry.location.lat(),
+        long: place.geometry.location.lng(),
+      };
+      onLocationSelected(location);
+    });
+  }, []);
+
+  return <input ref={inputRef} placeholder="Enter your location" />;
+};
+
+export default LocationInput;

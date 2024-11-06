@@ -1,5 +1,21 @@
-// TODO: Render LocationInput component to capture user input and latitude/longitude
-// TODO: Pass lat/long as props to AuroraDisplay to fetch and display aurora data
+import React, { useState } from 'react';
+import LocationInput from '../components/LocationInput';
+import AuroraDisplay from '../components/AuroraDisplay';
 
-// TODO: Ensure the page layout is responsive and user-friendly
-// Display results prominently with a map and aurora probability data
+const AuroraFinder = () => {
+  const [location, setLocation] = useState(null);
+
+  const handleLocationSelected = (locationData) => {
+    setLocation(locationData);
+  };
+
+  return (
+    <div>
+      <h1>Aurora Finder</h1>
+      <LocationInput onLocationSelected={handleLocationSelected} />
+      <AuroraDisplay location={location} />
+    </div>
+  );
+};
+
+export default AuroraFinder;

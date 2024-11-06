@@ -1,9 +1,27 @@
-// TODO: Define state to hold aurora data (e.g., probability, images) and loading/error states
+import React, { useEffect, useState } from 'react';
 
-// TODO: Create a function to fetch aurora data using lat/long
-// Use fetch or axios to call the /api/aurora-data route
-// On success, update state with returned aurora data
+const AuroraDisplay = ({ location }) => {
+  const [auroraData, setAuroraData] = useState(null);
+  const [error, setError] = useState(null);
 
-// TODO: Use useEffect to call fetch function whenever lat/long props change
+  useEffect(() => {
+    if (location) {
+      fetch(`/api/aurora-data?lat=${location.lat}&long=${location.long}`)
+        .then(response => response.json())
+        .then(data => setAuroraData(data))
+        .catch(() => setError('Error fetching aurora data'));
+    }
+  }, [location]);
 
-// TODO: Conditionally render data (e.g., probability and images) or error/loading states
+  if (error) return <div>{error}</div>;
+  if (!auroraData) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <h2>Aurora Forecast</h2>
+      <p>Probability: {auroraData.probability?.value}%</p>
+    </div>
+  );
+};
+
+export default AuroraDisplay;
