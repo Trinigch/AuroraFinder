@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { AURORAS_API_KEY } from '../config/config';
 
-export const getAuroraData = async (req, res) => {
+export const getAuroraData = async (req: Request, res: Response) => {
   try {
     const { lat, long } = req.query;
 
