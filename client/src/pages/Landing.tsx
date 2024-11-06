@@ -2,7 +2,7 @@
 const Landing = () => {
     return (
         <>
-        <h2>About Auroras</h2>
+        <h2 className="h-2">About Auroras</h2>
         <section>
             <h3>What Are Auroras?</h3>
             <p>
