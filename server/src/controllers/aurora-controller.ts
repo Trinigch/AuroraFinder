@@ -1,16 +1,18 @@
-// TODO: Import necessary modules for HTTP requests and environment variables
-// Import the Auroras.live API key from config
-import { AURORAS_API_KEY } from '../config.js';
+import axios from 'axios';
+import { AURORAS_API_KEY } from '../config/config';
 
-// TODO: Use the key in the API request to Auroras.live, if required for the endpoint
+export const getAuroraData = async (req, res) => {
+  try {
+    const { lat, long } = req.query;
 
-// TODO: Define getAuroraData function accepting lat/long parameters
+    const aurorasUrl = `http://api.auroras.live/v1/?type=all&lat=${lat}&long=${long}&ace=true&images=true&probability=true`;
 
-// TODO: Construct API URL with required and optional parameters
-// Include ace, images, and probability
+    const response = await axios.get(aurorasUrl);
 
-// TODO: Use try/catch to handle async request to Auroras.live API
-// If successful, parse relevant response data (e.g., probability, images)
-// If error, return a relevant error message
+    res.json(response.data);
 
-// TODO: Export getAuroraData for route handling
+  } catch (error) {
+    console.error('Error fetching aurora data:', error);
+    res.status(500).json({ message: 'Error fetching aurora data' });
+  }
+};

@@ -1,7 +1,8 @@
-// TODO: Import getAuroraData from user-controller.ts
+import express from 'express';
+import { getAuroraData } from '../../controllers/aurora-controller';
 
-// TODO: Create a new route handler for /api/aurora-data
-// Accept request with lat/long in query parameters
-// Use getAuroraData to fetch data and return to client
+const router = express.Router();
 
-// TODO: Export the route for use in the main app router
+router.get('/aurora-data', getAuroraData);
+
+export default router;
