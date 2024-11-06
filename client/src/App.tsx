@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className='header-el'>
         <h1>Aurora Finder</h1>
         <Navbar />
       </header>
