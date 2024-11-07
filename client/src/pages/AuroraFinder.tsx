@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import LocationInput from '../components/LocationInput';
 import AuroraDisplay from '../components/AuroraDisplay';
 
-const AuroraFinder = () => {
-  const [location, setLocation] = useState(null);
+interface Location {
+  lat: number;
+  long: number;
+}
 
-  const handleLocationSelected = (locationData) => {
+const AuroraFinder: React.FC = () => {
+  const [location, setLocation] = useState<Location | null>(null);
+
+  const handleLocationSelected = (locationData: Location) => {
     setLocation(locationData);
   };
 

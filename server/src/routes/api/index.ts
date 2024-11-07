@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import auroraRoutes from './aurora-routes';
+import auroraRoutes from './aurora-routes.js';
 import { userRouter } from './user-routes.js';
 
 const router = Router();
