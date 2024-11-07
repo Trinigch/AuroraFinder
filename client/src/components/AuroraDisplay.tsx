@@ -36,6 +36,7 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
   return (
     <div>
       <h2>Aurora Forecast</h2>
+      <img/>
       <p>Probability: {auroraData.probability?.value}%</p>
     </div>
   );
