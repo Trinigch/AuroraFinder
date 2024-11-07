@@ -28,7 +28,7 @@ const Login = () => {
     const handleSignUp = async (e: any) => {
 
         await fetch('/', )
-        
+
         setUserName('');
         setPassword('');
     }
@@ -43,14 +43,17 @@ const Login = () => {
                 type="text" 
                 name="userName"
                 id="userName"
+                placeholder="Username"
                 onChange={handleInputChange}
-                />
+                /> <br/>
+                <label htmlFor='password'>Password:</label>
                 <input 
                 type="text"
                 name="password"
                 id="password"
+                placeholder="Password"
                 onChange={handleInputChange}
-                />
+                /> <br/>
                 <button onClick={handleLogin}>
                     Login
                 </button>
