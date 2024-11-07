@@ -20,11 +20,15 @@ h1 {
     top:50;
 }
 
+li {
+    text-align: center;
+}
+
 .nav-item {
     display: flex;
     padding: 20px 10px;
-    text-align: center;
-    width: 70px;
+    justify-content: center;
+    width: 80px;
 }
 
 .nav {
@@ -36,6 +40,7 @@ h1 {
 a, a:link, a:visited, a:focus, a:hover, a:active{
     color:beige;
     text-decoration:none;
+    text-align: center;
 }
 
 .nav-link {
@@ -44,20 +49,77 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
 
 ul {
     display: block;
+    font-size: 20px;
 }
 
 .header-el {
     position: relative;
-    height: 90px;
+    height: 100px;
 }
 
 main {
     margin: 0 20px 0 20px;
     background-color: #1c1c1c;
     padding: 10px;
-    height: 700px;
+    height: 100%;
+    font-size: 120%;
 }
 
 .error {
     margin-top: 100px;
+}
+
+.info {
+    width: 50%;
+    display: inline-block;
+}
+
+.fact-list > li {
+    padding: 10px;
+}
+
+.img-aurora {
+    max-height: 65%;
+    width: 30%;
+    float: right;
+    margin: 1em 3em;
+}
+
+@media screen and (max-width: 768px) {
+    .info {
+        width: 90%;
+    }
+    main {
+        height: 90%;
+    }
+    .nav {
+        display: flex;
+        width: 95%;
+        align-items: center;
+        float: none;
+        justify-content: center;
+        position: absolute;
+        top:115px;
+        left:2.5%;
+        background-color: #1c1c1c;
+    }
+    h1 {
+        display: inline;
+        width: 100%;
+    }
+    .header-el {
+        height: 200px;
+    }
+    .h-3 {
+        text-align: center;
+    }
+    .img-aurora {
+        float: none;
+        display: block;
+        margin: auto;
+        padding: 25px 0;
+    }
+    ul {
+        padding: 0;
+    }
 }
