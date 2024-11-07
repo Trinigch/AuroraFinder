@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAuroraData } from '../../controllers/aurora-controller';
+import { getAuroraData } from '../../controllers/aurora-controller.js';
 
 const router = express.Router();
 
