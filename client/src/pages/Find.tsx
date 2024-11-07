@@ -1,3 +1,4 @@
+import AuroraDisplay from "../components/AuroraDisplay";
 import LocationInput from "../components/LocationInput";
 
 const Find = () => {
@@ -14,6 +15,9 @@ const Find = () => {
                     {/* Pass handleLocationSelected as the required onLocationSelected prop */}
                     <LocationInput onLocationSelected={handleLocationSelected} />
                 </div>
+            </div>
+            <div className='container'>
+                <AuroraDisplay location={}/>
             </div>
         </>
     );

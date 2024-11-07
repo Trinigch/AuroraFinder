@@ -2,21 +2,42 @@ import { useState } from "react";
 
 const Login = () => {
 
-    const [userName, setUserName] = useState('');
+    const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: any) => {
         // Getting the value and name of the input which triggered the change
         const { name, value } = e.target;
     
         return name === 'userName' ? setUserName(value) : setPassword(value);
     };
+    const handleLogin = async (e: any) => {
+
+        const response = await fetch('/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'                
+            },
+            body: JSON.stringify({username,password})
+        });
+        const data = await response.json();
+        localStorage.setItem('currentUser', data.token.username)
+        setUserName('');
+        setPassword('');
+    }
+    const handleSignUp = async (e: any) => {
+
+        await fetch('/', )
+        
+        setUserName('');
+        setPassword('');
+    }
 
 
     return (
         <> 
             <div className="conatainer">
-            <form action="">
+            <form >
                 <label htmlFor='userName'>UserName:</label>
                 <input 
                 type="text" 
@@ -30,10 +51,10 @@ const Login = () => {
                 id="password"
                 onChange={handleInputChange}
                 />
-                <button type="submit">
+                <button onClick={handleLogin}>
                     Login
                 </button>
-                <button type="submit">
+                <button onClick={handleSignUp}>
                     Sign Up
                 </button>
             </form>
