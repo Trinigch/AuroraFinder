@@ -17,7 +17,7 @@ const Find = () => {
                 </div>
             </div>
             <div className='container'>
-                <AuroraDisplay location={}/>
+                {/*<AuroraDisplay location={}/> */}
             </div>
         </>
     );
