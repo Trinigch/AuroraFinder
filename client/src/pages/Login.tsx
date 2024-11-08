@@ -54,10 +54,10 @@ const Login = () => {
                 placeholder="Password"
                 onChange={handleInputChange}
                 /> <br/>
-                <button onClick={handleLogin}>
+                <button className="submit" onClick={handleLogin}>
                     Login
                 </button>
-                <button onClick={handleSignUp}>
+                <button className="submit" onClick={handleSignUp}>
                     Sign Up
                 </button>
             </form>
