@@ -7,9 +7,16 @@ interface Location {
 
 interface AuroraData {
   probability?: {
-    value: number;
-    // Add other properties if needed
-  };
+    calculated: {
+      value: number;
+    }
+  },
+  ace: {
+    colour: {
+      kp: string;
+    }
+  }
+  // Add other properties if needed
   // Define other properties as needed based on API response structure
 }
 
@@ -23,7 +30,7 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
 
   useEffect(() => {
     if (location) {
-      fetch(`/api/aurora-data?lat=${location.lat}&long=${location.long}`)
+      fetch(`/api/aurora/aurora-data?lat=${location.lat}&long=${location.long}`)
         .then(response => response.json())
         .then(data => setAuroraData(data))
         .catch(() => setError('Error fetching aurora data'));
@@ -36,8 +43,13 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
   return (
     <div>
       <h2>Aurora Forecast</h2>
-      <img/>
-      <p>Probability: {auroraData.probability?.value}%</p>
+      <figure>
+        <img src='http://auroramax.phys.ucalgary.ca/recent/recent_1080p.jpg' alt='a view of auroras from canada' />
+        <figcaption>A view of auroras in Canada</figcaption>
+      </figure>
+
+      <p>Intenstity: {auroraData.ace.colour.kp}</p>
+      <p>Probability: {auroraData.probability?.calculated?.value}%</p>
     </div>
   );
 };
