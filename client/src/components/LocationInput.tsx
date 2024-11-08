@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface LocationInputProps {
-  onLocationSelected: (location: { lat: number; long: number }) => void;
+  onLocationSelected: (location: { lat: number; lon: number }) => void;
 }
 
 const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => {
@@ -11,38 +11,44 @@ const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => 
 
   useEffect(() => {
     async function initMap() {
-      // Request the Places library
-      //@ts-ignore
-      await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
+      try {
+        // Import the Places library from Google Maps API
+        //@ts-ignore
+        await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
 
-      // Create the input element with Place Autocomplete
-      //@ts-ignore
-      const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
-      
-      if (containerRef.current) {
-        containerRef.current.appendChild(placeAutocomplete);
-      }
+        // Create the Place Autocomplete element
+        //@ts-ignore
+        const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
 
-      // Set up event listener for place selection
-      //@ts-ignore
-      placeAutocomplete.addEventListener('gmp-placeselect', async ({ place }) => {
-        await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location'] });
-
-        // Display place information in the UI (optional), ensuring refs are not null
-        if (selectedPlaceTitleRef.current && selectedPlaceInfoRef.current) {
-          selectedPlaceTitleRef.current.textContent = 'Selected Place:';
-          selectedPlaceInfoRef.current.textContent = JSON.stringify(
-            place.toJSON(), null, 2
-          );
+        // Append the autocomplete element to the container
+        if (containerRef.current) {
+          containerRef.current.appendChild(placeAutocomplete);
         }
 
-        // Extract location data and send to parent component
-        const location = {
-          lat: place.location.lat(),
-          long: place.location.lng()
-        };
-        onLocationSelected(location);
-      });
+        // Add event listener for place selection
+        //@ts-ignore
+        placeAutocomplete.addEventListener('gmp-placeselect', async ({ place }) => {
+          await place.fetchFields({ fields: ['location'] });
+
+          // Optional: display selected place information
+          if (selectedPlaceTitleRef.current && selectedPlaceInfoRef.current) {
+            selectedPlaceTitleRef.current.textContent = 'Selected Place:';
+            selectedPlaceInfoRef.current.textContent = JSON.stringify(
+              place.toJSON(), null, 2
+            );
+          }
+
+          // Extract latitude and longitude from the place object
+          const location = {
+            lat: place.location.lat(),
+            lon: place.location.lng()
+          };
+          console.log("location - LocationInput:", location);
+          onLocationSelected(location); // Pass to parent component
+        });
+      } catch (error) {
+        console.error('Error loading Google Maps Places library:', error);
+      }
     }
 
     initMap();

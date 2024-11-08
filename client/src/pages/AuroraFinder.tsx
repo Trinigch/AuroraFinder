@@ -4,11 +4,14 @@ import AuroraDisplay from '../components/AuroraDisplay';
 
 interface Location {
   lat: number;
-  long: number;
+  lon: number; 
 }
 
 const AuroraFinder: React.FC = () => {
-  const [location, setLocation] = useState<Location | null>(null);
+
+  const exampleLocation: Location = { lat: 64.8378, lon: -147.7164 };
+  const [location, setLocation] = useState<Location | null>(exampleLocation);
+  //const [location, setLocation] = useState<Location | null>(null);
 
   const handleLocationSelected = (locationData: Location) => {
     setLocation(locationData);
@@ -18,7 +21,11 @@ const AuroraFinder: React.FC = () => {
     <div>
       <h1>Aurora Finder</h1>
       <LocationInput onLocationSelected={handleLocationSelected} />
-      <AuroraDisplay location={location} />
+      {location ? (
+        <AuroraDisplay location={location} />
+      ) : (
+        <p>set location to see level of aurora</p>
+      )}
     </div>
   );
 };

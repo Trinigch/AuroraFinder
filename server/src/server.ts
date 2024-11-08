@@ -23,8 +23,22 @@ app.use(express.static('../client/dist'));
 app.use(express.json());
 app.use(routes);
 
-sequelize.sync({force: forceDatabaseRefresh}).then(() => {
+/*sequelize.sync({force: forceDatabaseRefresh}).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
 });
+*/
+const shouldSyncDb = process.env.SYNC_DB === "true";
+
+if (shouldSyncDb) {
+  sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is listening on port ${PORT}`);
+    });
+  });
+} else {
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+  });
+}

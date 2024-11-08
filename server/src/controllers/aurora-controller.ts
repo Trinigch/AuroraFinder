@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Request, Response } from 'express';
 
 export const getAuroraData = async (req: Request, res: Response) => {
+  console.log("Received request with data:", req.body); 
   try {
     // Extract lat/long and ensure they are interpreted as numbers
     const lat = parseFloat(req.query.lat as string);

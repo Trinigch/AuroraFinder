@@ -15,11 +15,9 @@ interface AuroraData {
 
 class AuroraService {
   private baseURL: string;
- // private apiKey: string;
 
   constructor() {
     this.baseURL = process.env.API_BASE_URL || 'https://api.auroras.live';
-   // this.apiKey = process.env.API_KEY || 'zfemcDJWKzjaczrOmqYHdPpzYpPfsiRA';
 
     if (!this.baseURL) {
       throw new Error('API base URL is missing.');
@@ -40,10 +38,10 @@ class AuroraService {
 
     const data = await response.json();
 
-    // Extraer `kp` y `date` del JSON recibido
-    const kp = data.kp; // Índice Kp de actividad auroral
-    const date = data.date; // Fecha de observación
-console.log("kp, date", kp, date);
+    // Extraer Kp y la fecha
+    const kp = data.ace?.kp || data.probability?.value; // Usamos el valor de 'kp' si está disponible
+    const date = data.date || data.ace?.date; // Usamos la fecha de la respuesta
+
     return { kp, date };
   }
 

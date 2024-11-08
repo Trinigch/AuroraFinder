@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 interface Location {
   lat: number;
-  long: number;
+  lon: number;
 }
 
 interface AuroraData {
-  probability?: {
-    value: number;
-    // Add other properties if needed
-  };
-  // Define other properties as needed based on API response structure
+  date?: string;
+  kp?: number;
 }
 
 interface AuroraDisplayProps {
@@ -23,9 +20,23 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
 
   useEffect(() => {
     if (location) {
-      fetch(`/api/aurora-data?lat=${location.lat}&long=${location.long}`)
+      console.log('Fetching aurora data for:', location);  // Verificar que las coordenadas están correctas
+
+      fetch('/api/aurora-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ lat: location.lat, lon: location.lon }),
+      })
         .then(response => response.json())
-        .then(data => setAuroraData(data))
+      
+     
+        .then(data => {
+          console.log("Received data from server:", data); // Este console.log muestra la respuesta recibida
+          setAuroraData(data);
+        })
+        
         .catch(() => setError('Error fetching aurora data'));
     }
   }, [location]);
@@ -36,8 +47,8 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
   return (
     <div>
       <h2>Aurora Forecast</h2>
-      <img/>
-      <p>Probability: {auroraData.probability?.value}%</p>
+      <p><strong>Date:</strong> {auroraData.date || 'N/A'}</p>
+      <p><strong>Activity Level (Kp Index):</strong> {auroraData.kp || 'N/A'}</p>
     </div>
   );
 };
