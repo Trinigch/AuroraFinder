@@ -49,14 +49,20 @@ const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => 
   }, [onLocationSelected]);
 
   return (
+    <>
     <div>
-      {/* Container for the Google Places input */}
-      <div ref={containerRef}></div>
+      <div>
+        {/* Container for the Google Places input */}
+        <div ref={containerRef}></div>
       
-      {/* Optional UI for displaying selected place details */}
-      <p ref={selectedPlaceTitleRef}></p>
-      <pre ref={selectedPlaceInfoRef}></pre>
+        {/* Optional UI for displaying selected place details */}
+        <p ref={selectedPlaceTitleRef}></p>
+        <pre ref={selectedPlaceInfoRef}></pre>
+      </div>
+      <p>Please input your address to find out your chances of seeing an aurora tonight</p>
+      <p>Please make sure you are logged in before inputting your information</p>
     </div>
+    </>
   );
 };
 

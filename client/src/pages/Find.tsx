@@ -4,8 +4,8 @@ import { useState } from 'react';
 const Find = () => {
     // Handler to be called when a location is selected
     
-    const [long, setLong] = useState(0);
-    const [lat, setLat] = useState(0);
+    const [long, setLong] = useState(-73.9352);
+    const [lat, setLat] = useState(40.7128);
 
     const handleLocationSelected = (locationData: { lat: number, long: number }) => {
         // Save the location data to the user profile or app state

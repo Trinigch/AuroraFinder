@@ -11,10 +11,11 @@ export const getAuroraData = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Invalid latitude or longitude' });
     }
 
-    const aurorasUrl = `http://api.auroras.live/v1/?type=all&lat=${lat}&long=${long}&ace=true&images=true&probability=true`;
+    const aurorasUrl = `https://api.auroras.live/v1/?type=all&lat=${lat}&long=${long}&forecast=false&threeday=false&images=true`;
+    //const aurorasUrl = `http://api.auroras.live/v1/?type=all&lat=${lat}&long=${long}&ace=true&images=true&probability=true`;
 
     const response = await axios.get<any>(aurorasUrl);
-
+    console.log(response);
     res.json(response.data);
 
     return;

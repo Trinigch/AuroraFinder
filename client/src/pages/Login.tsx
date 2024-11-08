@@ -11,7 +11,7 @@ const Login = () => {
     
         return name === 'userName' ? setUserName(value) : setPassword(value);
     };
-    const handleLogin = async (e: any) => {
+    const handleLogin = async (_e: any) => {
 
         const response = await fetch('/auth/login', {
             method: 'POST',
@@ -25,7 +25,7 @@ const Login = () => {
         setUserName('');
         setPassword('');
     }
-    const handleSignUp = async (e: any) => {
+    const handleSignUp = async (_e: any) => {
 
         await fetch('/', )
 

@@ -17,8 +17,12 @@ const AuroraFinder: React.FC = () => {
   return (
     <div>
       <h1>Aurora Finder</h1>
+      <div>
       <LocationInput onLocationSelected={handleLocationSelected} />
+      </div>
+      <div>
       <AuroraDisplay location={location} />
+      </div>
     </div>
   );
 };
