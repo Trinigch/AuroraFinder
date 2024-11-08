@@ -36,7 +36,11 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
   return (
     <div>
       <h2>Aurora Forecast</h2>
-      <p>Probability: {auroraData.probability?.value}%</p>
+      {auroraData.probability ? (
+        <p>Probability: {auroraData.probability.value}%</p>
+      ) : (
+        <p>Probability data not available</p>
+      )}
     </div>
   );
 };
