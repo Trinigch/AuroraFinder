@@ -11,7 +11,7 @@ interface AuroraData {
       value: number;
     }
   },
-  ace?: {
+  ace: {
     colour: {
       kp: string;
     }
