@@ -49,7 +49,11 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
       </figure>
 
       <p>Intenstity: {auroraData.ace.colour.kp}</p>
-      <p>Probability: {auroraData.probability?.calculated?.value}%</p>
+      {auroraData.probability ? (
+        <p>Probability: {auroraData.probability?.calculated.value}%</p>
+      ) : (
+        <p>Probability data not available</p>
+      )}
     </div>
   );
 };
