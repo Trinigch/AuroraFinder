@@ -60,6 +60,7 @@ const Login = () => {
 
     return (
         <> 
+
             <div className="containerLogin">
                 <form onSubmit={handleLogin}>
                     <label htmlFor="userName">UserName:</label>
@@ -88,6 +89,33 @@ const Login = () => {
                 <form onSubmit={handleSignUp}>
                     <button type="submit">Sign Up</button> 
                 </form>
+
+            <div className="conatainer">
+            <form >
+                <label htmlFor='userName'>UserName:</label>
+                <input 
+                type="text" 
+                name="userName"
+                id="userName"
+                placeholder="Username"
+                onChange={handleInputChange}
+                /> <br/>
+                <label htmlFor='password'>Password:</label>
+                <input 
+                type="text"
+                name="password"
+                id="password"
+                placeholder="Password"
+                onChange={handleInputChange}
+                /> <br/>
+                <button className="submit" onClick={handleLogin}>
+                    Login
+                </button>
+                <button className="submit" onClick={handleSignUp}>
+                    Sign Up
+                </button>
+            </form>
+
             </div>
         </>
     );
