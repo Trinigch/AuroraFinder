@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface LocationInputProps {
-  onLocationSelected: (location: { lat: number; long: number }) => void;
+  onLocationSelected: (location: { lat: number; lon: number }) => void;
 }
 
 const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => {
@@ -39,7 +39,7 @@ const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => 
         // Extract location data and send to parent component
         const location = {
           lat: place.location.lat(),
-          long: place.location.lng()
+          lon: place.location.lng()
         };
         onLocationSelected(location);
       });

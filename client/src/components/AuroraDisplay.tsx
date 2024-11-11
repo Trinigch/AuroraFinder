@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 interface Location {
   lat: number;
-  long: number;
+  lon: number;
 }
 
 interface AuroraData {
@@ -30,7 +30,7 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
 
   useEffect(() => {
     if (location) {
-      fetch(`/api/aurora/aurora-data?lat=${location.lat}&long=${location.long}`)
+      fetch(`/api/aurora/aurora-data?lat=${location.lat}&long=${location.lon}`)
         .then(response => response.json())
         .then(data => setAuroraData(data))
         .catch(() => setError('Error fetching aurora data'));
