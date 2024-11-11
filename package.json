@@ -25,8 +25,11 @@
     "wait-on": "^7.2.0"
   },
   "dependencies": {
+    "@geoapify/geocoder-autocomplete": "^2.1.0",
+    "@geoapify/react-geocoder-autocomplete": "^2.0.1",
     "@googlemaps/extended-component-library": "^0.6.13",
     "bootstrap": "^5.3.3",
+    "node-fetch": "^3.3.2",
     "normalize.css": "^8.0.1"
   }
 }

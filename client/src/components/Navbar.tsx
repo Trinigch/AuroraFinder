@@ -24,7 +24,7 @@ const Navbar = () => {
                         Sign out
                     </Link>
                 </li>
-                <li className='Home'>
+                <li className='nav-item'>
                     <Link to="/home">
                         Home
                     </Link>

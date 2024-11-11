@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleInputChange = (e: any) => {
         // Getting the value and name of the input which triggered the change
@@ -14,7 +14,7 @@ const Login = () => {
     };
 
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const response = await fetch('/auth/login', {
             method: 'POST',
@@ -30,19 +30,19 @@ const Login = () => {
             localStorage.setItem('currentUser', data.token.username);
             setUserName('');
             setPassword('');
-            navigate('/'); 
+            navigate('/');
         } else {
             alert('Login failed: ' + data.message);
         }
     }
 
     const handleSignUp = async (e: React.FormEvent) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const response = await fetch('/auth/signup', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ username, password })
         });
@@ -51,7 +51,7 @@ const Login = () => {
             alert('User created successfully!');
             setUserName('');
             setPassword('');
-            navigate('/login'); 
+            navigate('/login');
         } else {
             const data = await response.json();
             alert('Error: ' + data.message);
@@ -59,66 +59,38 @@ const Login = () => {
     }
 
     return (
-        <> 
-
+        <>
             <div className="containerLogin">
-                <form onSubmit={handleLogin}>
-                    <label htmlFor="userName">UserName:</label>
-                    <input 
-                        type="text" 
-                        name="userName"
-                        id="userName"
-                        placeholder="Username"
-                        onChange={handleInputChange}
-                        value={username}
-                    /> 
-                    <br />
-                    <label htmlFor="password">Password:</label>
-                    <input 
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password"
-                        onChange={handleInputChange}
-                        value={password}
-                    /> 
-                    <br />
-                    <button type="submit">Login</button> 
-                </form>
+                <div className="conatainer">
+                    <form >
+                        <label htmlFor='userName'>UserName:</label>
+                        <input
+                            type="text"
+                            name="userName"
+                            id="userName"
+                            placeholder="Username"
+                            onChange={handleInputChange}
+                        /> <br />
+                        <label htmlFor='password'>Password:</label>
+                        <input
+                            type="text"
+                            name="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={handleInputChange}
+                        /> <br />
+                        <button className="submit" onClick={handleLogin}>
+                            Login
+                        </button>
+                        <button className="submit" onClick={handleSignUp}>
+                            Sign Up
+                        </button>
+                    </form>
 
-                <form onSubmit={handleSignUp}>
-                    <button type="submit">Sign Up</button> 
-                </form>
-
-            <div className="conatainer">
-            <form >
-                <label htmlFor='userName'>UserName:</label>
-                <input 
-                type="text" 
-                name="userName"
-                id="userName"
-                placeholder="Username"
-                onChange={handleInputChange}
-                /> <br/>
-                <label htmlFor='password'>Password:</label>
-                <input 
-                type="text"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={handleInputChange}
-                /> <br/>
-                <button className="submit" onClick={handleLogin}>
-                    Login
-                </button>
-                <button className="submit" onClick={handleSignUp}>
-                    Sign Up
-                </button>
-            </form>
-
+                </div>
             </div>
         </>
-    );
+    )
 }
 
 export default Login;

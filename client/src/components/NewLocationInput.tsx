@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import { fetchAuroraData } from '../services/auroraService';
 import AuroraDataComponent from './AuroraDataComponent';
 
