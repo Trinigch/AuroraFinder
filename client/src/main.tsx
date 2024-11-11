@@ -8,6 +8,7 @@ import Landing from './pages/Landing.tsx'
 import Login from './pages/Login.tsx'
 import ErrorPage from './pages/Error.tsx'
 import Find from './pages/Find.tsx';
+import HomePage from './pages/HomePage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             path: '/find',
             element: <Find />
         },
+        {
+          path: '/home',
+          element: <HomePage />,
+        }
       ],
     },
   ]);
