@@ -24,6 +24,11 @@ const Navbar = () => {
                         Sign out
                     </Link>
                 </li>
+                <li className='Home'>
+                    <Link to="/home">
+                        Home
+                    </Link>
+                </li>
             </ul>
         </div>
     );
