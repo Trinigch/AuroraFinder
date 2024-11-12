@@ -31,6 +31,7 @@ dotenv.config();
 
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './user.js';
+import { HistoryFactory} from './history.js';
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -44,6 +45,11 @@ const sequelize = process.env.DB_URL
 
 const User = UserFactory(sequelize);
 
+
+const History =  HistoryFactory(sequelize);
+
+User.hasMany(History, { foreignKey: 'userId' });
+History.belongsTo(User, { foreignKey: 'userId', as: 'historyUser'});
 /*
 const Ticket = TicketFactory(sequelize);
 

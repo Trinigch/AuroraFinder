@@ -28,7 +28,7 @@ sequelize.sync({force: forceDatabaseRefresh}).then(() => {
     console.log(`Server is listening on port ${PORT}`);
   });
 });*/
-const forceDatabaseRefresh = false;
+const forceDatabaseRefresh = true;
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -59,7 +59,7 @@ app.use(routes);
   });
 });
 */
-const shouldSyncDb = process.env.SYNC_DB === "true";
+const shouldSyncDb = true
 
 if (shouldSyncDb) {
   sequelize.sync({ force: forceDatabaseRefresh }).then(() => {

@@ -30,6 +30,7 @@ const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => 
 
         // Display place information in the UI (optional), ensuring refs are not null
         if (selectedPlaceTitleRef.current && selectedPlaceInfoRef.current) {
+          console.log("place",selectedPlaceTitleRef.current.textContent)
           selectedPlaceTitleRef.current.textContent = 'Selected Place:';
           selectedPlaceInfoRef.current.textContent = JSON.stringify(
             place.toJSON(), null, 2
