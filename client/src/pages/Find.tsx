@@ -1,13 +1,13 @@
-import AuroraDisplay from "../components/AuroraDisplay";
+//import AuroraDisplay from "../components/AuroraDisplay";
 import LocationInput from "../components/NewLocationInput";
-import { useState } from 'react';
-import Location from "../interfaces/Location";
+//import { useState } from 'react';
+//import Location from "../interfaces/Location";
 import GeoapifyAutocomplete from '../components/GeoApify';
 
 const Find = () => {
 
     // Handler to be called when a location is selected
-    const [location, setLocation] = useState<Location | null>(null);
+    //const [location, setLocation] = useState<Location | null>(null);
 
     //const [long, setLong] = useState(-73.9352);
     //const [lat, setLat] = useState(40.7128);
@@ -19,7 +19,7 @@ const Find = () => {
         setLong(locationData.long);
         console.log("Selected location:", locationData);
     };
-    */
+    
     const handlePlaceSelect = (value: any) => {
         if (value && value.properties) {
             setLocation({
@@ -28,7 +28,7 @@ const Find = () => {
             });
         }
     };
-
+    */
     
     return (
         <>
@@ -38,9 +38,6 @@ const Find = () => {
                     {/* Pass handleLocationSelected as the required onLocationSelected prop */}
                     <LocationInput />
                 </div>
-            </div>
-            <div className='container'>
-                <AuroraDisplay location={location}/>
             </div>
         </>
     );
