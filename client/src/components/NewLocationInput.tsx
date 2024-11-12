@@ -1,11 +1,14 @@
  import React, { useState } from 'react';
-import { fetchAuroraData } from '../services/auroraService';
-import AuroraDataComponent from './AuroraDataComponent';
+//import { fetchAuroraData } from '../services/auroraService';
+//import AuroraDataComponent from './AuroraDataComponent';
+import AuroraDisplay from './AuroraDisplay';
+import Location from '../interfaces/Location';
 
 const LocationInput: React.FC = () => {
     const [lat, setLat] = useState<number | null>(null);
     const [long, setLong] = useState<number | null>(null);
-    const [auroraData, setAuroraData] = useState(null);
+    //const [auroraData, setAuroraData] = useState(null);
+    const [locationData, setLocationData] = useState<Location | null>(null);
 
     const handleFetchData = async () => {
         if (lat === null || long === null) {
@@ -13,14 +16,16 @@ const LocationInput: React.FC = () => {
             return;
         }
         try {
-            const data = await fetchAuroraData(lat, long);
-            setAuroraData(data);
+            let convertToLocation: Location = {lat: lat, lon: long}
+            await setLocationData(convertToLocation);
+            
         } catch (error) {
             console.error("Failed to fetch aurora data.");
         }
     };
 
     return (
+        <>
         <div>
             <h3>Enter Location</h3>
             <input
@@ -38,8 +43,9 @@ const LocationInput: React.FC = () => {
             <button onClick={handleFetchData}>Get Aurora Data</button>
 
             {/* Display the fetched aurora data */}
-            {auroraData && <AuroraDataComponent data={auroraData} />}
+            {locationData && <AuroraDisplay location={locationData}/>}
         </div>
+        </>
     );
 };
 
