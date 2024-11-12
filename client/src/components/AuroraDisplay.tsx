@@ -42,18 +42,19 @@ const AuroraDisplay: React.FC<AuroraDisplayProps> = ({ location }) => {
 
   return (
     <div>
+      <div className='find-container'>
       <h2>Aurora Forecast</h2>
-      <figure>
-        <img src='http://auroramax.phys.ucalgary.ca/recent/recent_1080p.jpg' alt='a view of auroras from canada' />
-        <figcaption>A view of auroras in Canada</figcaption>
-      </figure>
-
       <p>Intenstity: {auroraData.ace.colour.kp}</p>
       {auroraData.probability ? (
         <p>Probability: {auroraData.probability?.calculated.value}%</p>
       ) : (
         <p>Probability data not available</p>
       )}
+      </div>
+      <div className='fig-container'>
+        <img className='find-img-aurora' src='http://auroramax.phys.ucalgary.ca/recent/recent_1080p.jpg' alt='a view of auroras from canada' />
+        <figcaption>A view of auroras in Canada</figcaption>
+      </div>
     </div>
   );
 };

@@ -1,72 +1,72 @@
-import React, { useEffect, useRef } from 'react';
+// import React, { useEffect, useRef } from 'react';
 
-interface LocationInputProps {
-  onLocationSelected: (location: { lat: number; lon: number }) => void;
-}
+// interface LocationInputProps {
+//   onLocationSelected: (location: { lat: number; lon: number }) => void;
+// }
 
-const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const selectedPlaceTitleRef = useRef<HTMLParagraphElement | null>(null);
-  const selectedPlaceInfoRef = useRef<HTMLPreElement | null>(null);
+// const LocationInput: React.FC<LocationInputProps> = ({ onLocationSelected }) => {
+//   const containerRef = useRef<HTMLDivElement | null>(null);
+//   const selectedPlaceTitleRef = useRef<HTMLParagraphElement | null>(null);
+//   const selectedPlaceInfoRef = useRef<HTMLPreElement | null>(null);
 
-  useEffect(() => {
-    async function initMap() {
-      // Request the Places library
-      //@ts-ignore
-      await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
+//   useEffect(() => {
+//     async function initMap() {
+//       // Request the Places library
+//       //@ts-ignore
+//       await google.maps.importLibrary("places") as google.maps.PlacesLibrary;
 
-      // Create the input element with Place Autocomplete
-      //@ts-ignore
-      const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
+//       // Create the input element with Place Autocomplete
+//       //@ts-ignore
+//       const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
       
-      if (containerRef.current) {
-        containerRef.current.appendChild(placeAutocomplete);
-      }
+//       if (containerRef.current) {
+//         containerRef.current.appendChild(placeAutocomplete);
+//       }
 
-      // Set up event listener for place selection
-      //@ts-ignore
-      placeAutocomplete.addEventListener('gmp-placeselect', async ({ place }) => {
-        await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location'] });
+//       // Set up event listener for place selection
+//       //@ts-ignore
+//       placeAutocomplete.addEventListener('gmp-placeselect', async ({ place }) => {
+//         await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location'] });
 
-        // Display place information in the UI (optional), ensuring refs are not null
-        if (selectedPlaceTitleRef.current && selectedPlaceInfoRef.current) {
-          selectedPlaceTitleRef.current.textContent = 'Selected Place:';
-          selectedPlaceInfoRef.current.textContent = JSON.stringify(
-            place.toJSON(), null, 2
-          );
-        }
+//         // Display place information in the UI (optional), ensuring refs are not null
+//         if (selectedPlaceTitleRef.current && selectedPlaceInfoRef.current) {
+//           selectedPlaceTitleRef.current.textContent = 'Selected Place:';
+//           selectedPlaceInfoRef.current.textContent = JSON.stringify(
+//             place.toJSON(), null, 2
+//           );
+//         }
 
-        // Extract location data and send to parent component
-        const location = {
-          lat: place.location.lat(),
-          lon: place.location.lng()
-        };
-        onLocationSelected(location);
-      });
-    }
+//         // Extract location data and send to parent component
+//         const location = {
+//           lat: place.location.lat(),
+//           lon: place.location.lng()
+//         };
+//         onLocationSelected(location);
+//       });
+//     }
 
-    initMap();
-  }, [onLocationSelected]);
+//     initMap();
+//   }, [onLocationSelected]);
 
-  return (
-    <>
-    <div>
-      <div>
-        {/* Container for the Google Places input */}
-        <div ref={containerRef}></div>
+//   return (
+//     <>
+//     <div>
+//       <div>
+//         {/* Container for the Google Places input */}
+//         <div ref={containerRef}></div>
       
-        {/* Optional UI for displaying selected place details */}
-        <p ref={selectedPlaceTitleRef}></p>
-        <pre ref={selectedPlaceInfoRef}></pre>
-      </div>
-      <p>Please input your address to find out your chances of seeing an aurora tonight</p>
-      <p>Please make sure you are logged in before inputting your information</p>
-    </div>
-    </>
-  );
-};
+//         {/* Optional UI for displaying selected place details */}
+//         <p ref={selectedPlaceTitleRef}></p>
+//         <pre ref={selectedPlaceInfoRef}></pre>
+//       </div>
+//       <p>Please input your address to find out your chances of seeing an aurora tonight</p>
+//       <p>Please make sure you are logged in before inputting your information</p>
+//     </div>
+//     </>
+//   );
+// };
 
-export default LocationInput;
+// export default LocationInput;
 
 
 

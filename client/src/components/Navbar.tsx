@@ -24,11 +24,11 @@ const Navbar = () => {
                         Sign out
                     </Link>
                 </li>
-                <li className='nav-item'>
+                {/* <li className='nav-item'>
                     <Link to="/home">
                         Home
                     </Link>
-                </li>
+                </li> */}
             </ul>
         </div>
     );
