@@ -16,7 +16,7 @@ const GeoapifyAutocomplete: React.FC = () => {
     useEffect(() => {
         const fetchApiKey = async () => {
             try {
-                const response = await axios.get('/api/geoapify-key');
+                const response = await axios.get('/api/geoapify');
                 setApiKey(response.data.apiKey);
             } catch (error) {
                 console.error('Failed to retrieve Geoapify API key:', error);
